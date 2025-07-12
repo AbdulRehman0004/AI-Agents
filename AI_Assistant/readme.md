@@ -1,4 +1,4 @@
-# 🤖 Multi-Modal AI Agent Suite
+# 🤖 Multi-Model AI Agent Suite
 
 > A powerful collection of AI-powered applications built on a sophisticated multi-modal agent capable of handling text, images, audio, documents, and complex reasoning tasks.
 
