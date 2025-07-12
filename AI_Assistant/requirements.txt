@@ -1,0 +1,41 @@
+# Core frameworks
+langchain
+langchain-community
+langchain-openai
+langgraph
+langchain-experimental
+llama_index
+rizaio
+streamlit
+
+# Dataset and model access
+datasets>=2.0.0
+huggingface_hub>=0.16.0
+transformers>=4.21.0
+
+# Web and API tools
+serpapi
+google-search-results
+wikipedia
+
+# File handling and parsing
+pandas>=2.0.1
+openpyxl
+pyxlsb2
+xlrd==1.2.0
+python-docx
+python-pptx
+nbformat
+
+# PDF and image processing
+PyMuPDF  # This provides the 'fitz' module
+pillow
+tesserocr
+lxml
+
+# Math and unit conversion
+pint
+sympy
+
+# Audio processing
+openai-whisper
