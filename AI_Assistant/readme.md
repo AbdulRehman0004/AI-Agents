@@ -9,17 +9,9 @@
 
 ## 🎯 Overview
 
-This project demonstrates a comprehensive AI agent system built with **LangChain**, **OpenAI GPT-4o**, and **LangGraph** that can handle diverse tasks across multiple modalities. The agent serves as the foundation for four specialized applications, each targeting different use cases and user needs.
+This project demonstrates a comprehensive AI agent system built with **LangChain**, **OpenAI GPT-4o**, and **LangGraph** that can handle diverse tasks across multiple modalities. The agent serves as the foundation for specialized applications, each targeting different use cases and user needs.
 
 ## 🚀 Live Applications
-
-### 🏠 AI Assistant Suite Landing Page
-**Purpose:** Unified launch page for all AI applications
-- **Features:** One-click app launching, progress tracking, port management
-- **Benefits:** Easy access to all tools, simultaneous app usage, status monitoring
-- **Interface:** Modern, responsive design with real-time feedback
-
-![Landing Page](Images/landing%20Page.png)
 
 ### 📚 Smart Document Assistant
 **Purpose:** Upload and analyze any type of document with AI-powered insights
@@ -82,7 +74,6 @@ AI_Agents/
     ├── docker-compose.yml          # Docker compose setup
     ├── readme.md                   # This documentation
     ├── Images/                     # 📸 Application screenshots
-    │   ├── landing Page.png
     │   ├── Smart Document Analysis.png
     │   ├── AI Math Tutor.png
     │   ├── Audio Transcription.png
@@ -90,10 +81,8 @@ AI_Agents/
     ├── test/                       # 🧪 Testing Suite
     │   ├── test_agent.py           # Agent functionality tests
     │   ├── test_audio.py           # Audio processing tests
-    │   ├── test_launch_page.py     # Landing page tests
     │   └── test_multiple_streamlit.py # Multi-app testing
     └── applications/               # 🖥️ Streamlit Applications
-        ├── AI_assistant_suit.py    # 🏠 Landing page for all applications
         ├── smart_document_assistant.py # 📚 Document analysis app
         ├── ai_math_tutor.py       # 🧮 Educational math assistant
         ├── audio_transcription_service.py # 🎵 Audio processing app
@@ -111,8 +100,8 @@ AI_Agents/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/multi-modal-ai-agent.git
-   cd multi-modal-ai-agent/AI_Assistant
+   git clone https://github.com/AbdulRehman0004/AI-Agents.git
+   cd AI-Agents/AI_Assistant
    ```
 
 2. **Create virtual environment:**
@@ -138,62 +127,14 @@ AI_Agents/
    # Navigate to applications folder
    cd applications
    
-   # Start the landing page (recommended)
-   streamlit run AI_assistant_suit.py
-   
-   # Or run individual applications directly
+   # Run individual applications directly
    streamlit run smart_document_assistant.py
    streamlit run ai_math_tutor.py
    streamlit run audio_transcription_service.py
    streamlit run data_analysis_assistant.py
    ```
 
-## 🎮 Getting Started with the Landing Page
-
-### Using the AI Assistant Suite Landing Page
-
-1. **Launch the Suite:**
-   ```bash
-   cd applications
-   streamlit run AI_assistant_suit.py
-   ```
-
-2. **Choose Your Application:**
-   - Click any "🚀 Launch" button to start an individual app
-   - Use "🚀 Launch All Apps" to start all applications simultaneously
-   - Each app opens in a new browser tab on different ports
-
-3. **Monitor Progress:**
-   - Real-time progress bars show startup status
-   - Clear feedback when applications are ready
-   - Direct links to access running applications
-
-### Port Configuration
-- **Landing Page:** http://localhost:8500
-- **Document Assistant:** http://localhost:8501
-- **Math Tutor:** http://localhost:8502
-- **Audio Transcription:** http://localhost:8503
-- **Data Analysis:** http://localhost:8504
-
-### Features
-- **Smart Port Detection:** Automatically checks if apps are already running
-- **Progress Tracking:** Visual progress bars and status updates
-- **Error Handling:** Clear error messages and troubleshooting tips
-- **Batch Launch:** Launch all applications with one click
-- **System Status:** Built-in diagnostics and help documentation
-
 ## 🎮 Usage Examples
-
-### Landing Page Navigation
-```bash
-# Launch the main suite (from AI_Assistant directory)
-cd applications
-streamlit run AI_assistant_suit.py
-
-# Navigate to any application with one click
-# Monitor startup progress in real-time
-# Access multiple apps simultaneously
-```
 
 ### Document Analysis
 ```python
@@ -227,19 +168,39 @@ streamlit run AI_assistant_suit.py
 ### Agent Design Pattern
 ```mermaid
 graph TD
-    A[User Input] --> B[LangGraph Router]
-    B --> C[Tool Selection]
-    C --> D[Parallel Tool Execution]
-    D --> E[GPT-4o Processing]
-    E --> F[Response Generation]
-    F --> G[User Output]
+    A[User Input] --> B[Assistant Node]
+    B --> C{Need Tools?}
+    C -->|Yes| D[Tool Selection & Execution]
+    C -->|No| E[Generate Final Answer]
+    D --> F[Process Tool Results]
+    F --> B
+    B --> G{Answer Complete?}
+    G -->|No| C
+    G -->|Yes| E
+    E --> H[Return Response]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style D fill:#fff3e0
+    style E fill:#e8f5e8
+    style H fill:#e8f5e8
 ```
 
+### ReAct (Reasoning & Acting) Flow
+The agent follows an iterative ReAct pattern:
+1. **Reasoning**: Analyzes the user's request and current context
+2. **Acting**: Selects and executes appropriate tools if needed
+3. **Observing**: Processes tool results and integrates new information
+4. **Deciding**: Determines if more tools are needed or if answer is complete
+5. **Repeating**: Continues the cycle until a satisfactory answer is reached
+
 ### Key Components
-- **LangGraph StateGraph:** Manages conversation flow and tool orchestration
-- **OpenAI GPT-4o:** Provides advanced reasoning and natural language understanding
-- **Tool Integration:** Modular tools for specific capabilities (math, files, web, etc.)
-- **Streamlit Frontend:** User-friendly web interfaces for each application
+- **LangGraph StateGraph:** Manages iterative conversation flow and maintains state
+- **Assistant Node:** Core reasoning engine powered by GPT-4o
+- **Tool Node:** Executes selected tools and returns results
+- **Conditional Edges:** Determines when to use tools vs. provide final answer
+- **ReAct Pattern:** Continuous reasoning-acting cycle until optimal solution is found
+- **State Management:** Preserves context, file references, and conversation history
 
 ## 🎯 Technical Highlights
 
@@ -250,9 +211,12 @@ graph TD
 - **Documents:** Structured data extraction from various formats
 
 ### Advanced Reasoning
-- **Chain-of-Thought:** Step-by-step problem solving
-- **Tool Orchestration:** Intelligent selection and combination of tools
-- **Context Awareness:** Maintains conversation history and context
+- **Iterative Problem Solving:** Agent continues working until it finds the best answer
+- **Multi-Tool Orchestration:** Can use multiple tools in sequence or combination
+- **Context Preservation:** Maintains conversation history and file state across iterations
+- **Self-Evaluation:** Determines when an answer is complete and satisfactory
+- **Error Recovery:** Handles tool failures and tries alternative approaches
+- **Smart Chunking:** Automatically manages large files and token limits
 
 ### Scalable Architecture
 - **Modular Design:** Easy to extend with new tools and capabilities
@@ -263,11 +227,10 @@ graph TD
 
 ### Local Development
 ```bash
-# Start the landing page (from AI_Assistant directory)
+# Start individual applications (from AI_Assistant directory)
 cd applications
-streamlit run AI_assistant_suit.py
 
-# Or run individual applications
+# Run individual applications
 streamlit run smart_document_assistant.py
 streamlit run ai_math_tutor.py
 streamlit run audio_transcription_service.py
@@ -286,9 +249,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
-EXPOSE 8500
+EXPOSE 8501
 WORKDIR /app/applications
-CMD ["streamlit", "run", "AI_assistant_suit.py"]
+CMD ["streamlit", "run", "smart_document_assistant.py"]
 ```
 
 ### Multi-App Deployment
@@ -325,21 +288,6 @@ docker-compose up  # Uses the included docker-compose.yml
 | **File Size Limits** | Up to 100MB per file |
 
 ## 🔧 Troubleshooting
-
-### Landing Page Issues
-
-**Problem:** Browser shows "Site Can't Be Reached" when clicking app links
-- **Solution:** Wait 10-20 seconds for apps to fully start, then try again
-- **Tip:** The landing page shows progress bars - wait for "✅ App is ready!" message
-
-**Problem:** Port already in use error
-- **Solution:** The landing page will detect this and provide a direct link to the running app
-- **Alternative:** Kill existing processes: `pkill -f streamlit` and try again
-
-**Problem:** App fails to launch after 20 seconds
-- **Solution:** Check terminal for error messages
-- **Check:** Ensure all required files exist in the directory
-- **Retry:** Click the launch button again
 
 ### General Issues
 
