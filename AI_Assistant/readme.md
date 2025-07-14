@@ -371,7 +371,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **LangChain** for the agent framework
 - **Streamlit** for the web application framework
 - **Open Source Community** for the various libraries and tools
-+
 ---
 
 ⭐ **Star this repository if you found it helpful!** ⭐
