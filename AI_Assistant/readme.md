@@ -1,6 +1,6 @@
 # � AI Agent Foundation - Your Digital Clay
 
-> **Think of AI agents like clay** - raw, powerful, and ready to be shaped into whatever you can imagine. This isn't just another AI project; it's a **foundational toolkit** that transforms into any application you 
+> **Think of AI agents like clay** - raw, powerful, and ready to be shaped into whatever you can imagine. This isn't just another AI project; it's a **foundational toolkit** that transforms into any application you need.
 
 **What you see here are just 4 examples. The real magic? This same foundation can become healthcare assistants, legal researchers, creative writers, or whatever your vision demands.**
 
